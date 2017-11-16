@@ -86,7 +86,7 @@ plt.plot(k_range, scores)
 # automatic grid search for an optimal value of K
 from sklearn.grid_search import GridSearchCV
 knn = KNeighborsClassifier()
-k_range = range(1, 30, 2)
+k_range = np.arange(1,30,2)
 param_grid = dict(n_neighbors=k_range)
 grid = GridSearchCV(knn, param_grid, cv=5, scoring='accuracy')
 grid.fit(X, y)
@@ -139,9 +139,9 @@ data = pd.concat([data, area_dummies], axis=1)
 ## CROSS-VALIDATION USING RMSE
 
 # create X and y
-feature_cols = ['TV', 'Radio', 'Newspaper', 'IsLarge', 'Area_suburban', 'Area_urban']
+feature_cols = ['TV', 'radio', 'newspaper', 'IsLarge', 'Area_suburban', 'Area_urban']
 X = data[feature_cols]
-y = data.Sales
+y = data.sales
 
 # use 10-fold cross-validation to estimate RMSE when including all features
 from sklearn.linear_model import LinearRegression
@@ -151,7 +151,7 @@ scores = cross_val_score(lm, X, y, cv=10, scoring='mean_squared_error')
 np.mean(np.sqrt(-scores))
 
 # repeat using only the 'meaningful' predictors
-feature_cols = ['TV', 'Radio']
+feature_cols = ['TV', 'radio']
 X = data[feature_cols]
 scores = cross_val_score(lm, X, y, cv=10, scoring='mean_squared_error')
 np.mean(np.sqrt(-scores))
@@ -189,7 +189,7 @@ logreg.score(X_test, y_test)
 # predict in one step, calculate accuracy in a separate step
 preds = logreg.predict(X_test)
 from sklearn import metrics
-print metrics.accuracy_score(y_test, preds)
+print(metrics.accuracy_score(y_test, preds))
 
 # compare to null accuracy rate
 y_test.mean()
@@ -199,15 +199,15 @@ y_test.mean()
 ## CONFUSION MATRIX
 
 # print confusion matrix
-print metrics.confusion_matrix(y_test, preds)
+print(metrics.confusion_matrix(y_test, preds))
 
 # nicer confusion matrix
 from nltk import ConfusionMatrix
-print ConfusionMatrix(list(y_test), list(preds))
+print(ConfusionMatrix(list(y_test), list(preds)))
 
 # sensitivity: percent of correct predictions when reference value is 'default'
 21 / float(58 + 21)
-print metrics.recall_score(y_test, preds)
+print(metrics.recall_score(y_test, preds))
 
 # specificity: percent of correct predictions when reference value is 'not default'
 2416 / float(2416 + 5)
@@ -220,14 +220,14 @@ plt.hist(probs)
 # use 0.5 cutoff for predicting 'default'
 import numpy as np
 preds = np.where(probs > 0.5, 1, 0)
-print ConfusionMatrix(list(y_test), list(preds))
+print(ConfusionMatrix(list(y_test), list(preds)))
 
 # change cutoff for predicting default to 0.2
 preds = np.where(probs > 0.2, 1, 0)
-print ConfusionMatrix(list(y_test), list(preds))
+print(ConfusionMatrix(list(y_test), list(preds)))
 
 # check accuracy, sensitivity, specificity
-print metrics.accuracy_score(y_test, preds)
+print(metrics.accuracy_score(y_test, preds))
 45 / float(34 + 45)
 2340 / float(2340 + 81)
 
@@ -243,7 +243,7 @@ plt.xlabel('False Positive Rate (1 - Specificity)')
 plt.ylabel('True Positive Rate (Sensitivity)')
 
 # calculate AUC
-print metrics.roc_auc_score(y_test, probs)
+print(metrics.roc_auc_score(y_test, probs))
 
 # use AUC as evaluation metric for cross-validation
 from sklearn.cross_validation import cross_val_score

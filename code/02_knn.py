@@ -36,7 +36,7 @@ knn = KNeighborsClassifier(n_neighbors=5)
 knn.fit(iris_df[iris.feature_names], iris_df.Species)
 knn.predict(X_new)              # predictions
 knn.predict_proba(X_new)        # predicted probabilities
-knn.kneighbors([3, 5, 4, 2])    # distances to nearest neighbors (and identities)
+knn.kneighbors([[3, 5, 4, 2]])    # distances to nearest neighbors (and identities)
 np.sqrt(((X[106] - [3, 5, 4, 2])**2).sum()) # Euclidian distance calculation for nearest neighbor
 
 # compute the accuracy for K=5 and K=1

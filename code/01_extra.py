@@ -9,7 +9,7 @@ You can use single or double quotes.
 # BASIC DATA TYPES
 
 x = 5               # creates an object
-print type(x)       # check the type: int (not declared explicitly)
+print(type(x))      # check the type: int (not declared explicitly)
 type(x)             # automatically prints
 type(5)             # assigning it to a variable is not required
 
@@ -52,7 +52,7 @@ random.choice(nums)         # Use a period to seperate module from function
 random.randint(0, 100)      # Another function! Get a random integer between two given ones
 
 for item in nums:           # A loop will go through each element of a list
-    print item
+    print(item)
 
 
 # powerful modules for getting data from the internet
@@ -102,4 +102,4 @@ for sentence in sentences:
     payload = {'text': sentence} # The sentence we want the sentiment of 
     headers = {'content-type': 'application/json'} # The type of data you are sending
     r = requests.post(url, data=json.dumps(payload), headers=headers) # Send the data
-    print sentence, json.loads(r.text)['score'] # Print the results
+    print(sentence, json.loads(r.text)['score']) # Print the results

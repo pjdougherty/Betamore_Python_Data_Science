@@ -25,7 +25,7 @@ import pandas as pd  # This line imports  (already installed) python package
 #        2) Select the options buttom in the upper right hand cornder of the editor
 #        3) Select "Set console working directory"
 
-ufo = pd.read_csv('../data/ufo.csv')   # .. goes up one level in the working directory
+#ufo = pd.read_csv('../data/ufo.csv')   # .. goes up one level in the working directory
 ufo = pd.read_csv('https://raw.githubusercontent.com/sinanuozdemir/Betamore_Python_Data_Science/master/data/ufo.csv')   # can also read csvs directly from the web!
 
 ufo                 
@@ -86,7 +86,8 @@ ufo_dallas = ufo[(ufo.City == 'Dallas') & (ufo.State =='TX')]
 ufo[ufo.City.isin(['Austin','Dallas', 'Houston'])]
 
 # sorting
-ufo.State.order()                               # only works for a Series
+#ufo.State.order()                               # only works for a Series, and only in 2.7
+ufo.State.sort_values()                         # sort values ascending
 ufo.sort_index(inplace=True)                    # sort rows by label
 ufo.sort_index(ascending=False)
 ufo.sort_index(by='State')                      # sort rows by specific column
